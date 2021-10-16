@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Route, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 
 import Login from './pages/Login';
 import CreateUser from './pages/CreateUser';
@@ -7,19 +8,14 @@ import Main from './pages/Main';
 
 const App = () =>{
 
-const history = useHistory()
-
   return (
-    <div>
-       <Router history={history}>
-         <div>
+    <Router>
+      <Switch>
            <Route path="/" exact component={Login} />
            <Route path="/CreateUser" exact component={CreateUser} />
            <Route path="/Main" exact component={Main} />
-         </div>
-       </Router>
-    </div>
-  
+      </Switch>
+    </Router>
   );
 }
 

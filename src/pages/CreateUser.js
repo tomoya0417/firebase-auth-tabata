@@ -23,7 +23,7 @@ const　toMain = () => {
             <TextField id="standard-basic" label="password" variant="standard" /><br/>
 
             <button onClick ={toMain}>アカウント作成</button><br/>
-            <Link onClick ={toLogin}>LOGIN画面へ</Link>
+            <Link onClick ={toLogin}>LOGIN</Link>
         </div>
     );};
 

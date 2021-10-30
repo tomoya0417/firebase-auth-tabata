@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
-
-
 import Login from './pages/Login';
 import CreateUser from './pages/CreateUser';
 import Main from './pages/Main';

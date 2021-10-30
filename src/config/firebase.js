@@ -1,5 +1,7 @@
  // Import the functions you need from the SDKs you need
  import { getApps,initializeApp } from 'firebase/app'
+ import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+
 
  // Your web app's Firebase configuration
  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -31,3 +33,31 @@ if (!apps.length) {
     //const errorMessage = error.message;
     // ..
   //});
+
+  export const createUser = (email, password) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password,)
+    .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user)
+    console.log("create user success!!")
+    return "success"
+    })
+    .catch((error) => {
+      console.log(error.message)
+    return "failed"
+    });
+    }
+
+  export const loginUser = (email, password) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+  })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  })};

@@ -2,9 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router";
 
 const Main = () =>{
-
 const history = useHistory()
-
 const toLogin = () => {
     history.push('/')
 }

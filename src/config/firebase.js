@@ -49,7 +49,7 @@ if (!apps.length) {
     });
     }
 
-  export const loginUser = (email, password) => {
+  export const login = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {

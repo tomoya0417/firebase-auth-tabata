@@ -4,14 +4,13 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import { createUser } from '../config/firebase';
 
-
 const CreateUser = () =>{
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const [error, setError] = useState('')
 const history = useHistory()
 
-const handleClick = async () => {
+const create = async () => {
     const result = await createUser(email, password)
     console.log("🚀 ~ file: CreateUser.js ~ line 13 ~ handleClick ~ result", result)
      if (result) {
@@ -31,8 +30,9 @@ const toLogin = () => {
             <TextField id="email" label="email" value={email} onChange={e => setEmail(e.target.value)} /><br />
             <TextField id="password" label="password" value={password} onChange={e => setPassword(e.target.value)} /><br />
 
-            <button onClick ={handleClick}>アカウント作成</button><br/>
+            <button onClick ={create}>アカウント作成</button><br/>
             <Link onClick ={toLogin}>LOGIN</Link>
+            <div>{error}</div>
         </div>
     );};
 

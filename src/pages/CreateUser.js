@@ -13,11 +13,10 @@ const history = useHistory()
 const create = async () => {
     const result = await createUser(email, password)
     console.log("🚀 ~ file: CreateUser.js ~ line 13 ~ handleClick ~ result", result)
-     if (result) {
+     if(result === "success") {
     history.push('/main')
-    } else {
-    setError("User作成に失敗しました。")
-    }
+    } else if(result === "faild"){
+    setError("User作成に失敗しました。")}
     }
         
 const toLogin = () => {

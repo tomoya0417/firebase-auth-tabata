@@ -34,20 +34,25 @@ if (!apps.length) {
     // ..
   //});
 
-  export const createUser = (email, password) => {
+  export const createUser = async (email, password) => {
+    let result =""
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password,)
     .then((userCredential) => {
     const user = userCredential.user;
     console.log(user)
     console.log("create user success!!")
-    return "success"
+    result = "success"
+    // return "success"
     })
     .catch((error) => {
-      console.log(error.message)
-    return "failed"
+      console.log(error.message,"===")
+      result = "failed"
+    // return "failed"
     });
+    return result
     }
+    
 
   export const login = (email, password) => {
     const auth = getAuth();

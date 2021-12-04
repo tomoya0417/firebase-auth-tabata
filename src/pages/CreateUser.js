@@ -15,7 +15,8 @@ const create = async () => {
     console.log("🚀 ~ file: CreateUser.js ~ line 13 ~ handleClick ~ result", result)
      if(result === "success") {
     history.push('/main')
-    } else if(result === "faild"){
+    } else 
+    {
     setError("User作成に失敗しました。")}
     }
         

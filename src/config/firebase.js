@@ -1,6 +1,11 @@
  // Import the functions you need from the SDKs you need
  import { getApps,initializeApp } from 'firebase/app'
- import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+ import { getAuth, 
+          createUserWithEmailAndPassword,
+          signInWithEmailAndPassword,
+          GoogleAuthProvider,
+          signInWithPopup,
+          signOut } from "firebase/auth";
 
 
  // Your web app's Firebase configuration
@@ -37,7 +42,7 @@ if (!apps.length) {
   export const createUser = async (email, password) => {
     let result =""
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password,)
+    await createUserWithEmailAndPassword(auth, email, password,)
     .then((userCredential) => {
     const user = userCredential.user;
     console.log(user)
@@ -54,15 +59,47 @@ if (!apps.length) {
     }
     
 
-  export const login = (email, password) => {
+  export const login = async (email, password) => {
+    let result2 = ""
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
-      // ...
+      console.log(user)
+      result2 = "success"
   })
     .catch((error) => {
+    console.log(error.message,"===")
+    result2 = "failed"
+  });
+  return result2
+}
+
+const provider = new GoogleAuthProvider();
+
+const auth = getAuth();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
-  })};
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+
+  const signout = getAuth();
+signOut(auth).then(() => {
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+});

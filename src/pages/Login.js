@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { useHistory } from "react-router";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import { login } from '../config/firebase';
+import { login, } from '../config/firebase';
 
 const Login = () =>{
 const [email, setEmail] = useState('')
@@ -11,17 +11,20 @@ const [error, setError] = useState('')
 const history = useHistory()
 
 const toLogin = async () => {
-    const result = await login(email, password)
-    console.log("🚀 ~ file: CreateUser.js ~ line 13 ~ handleClick ~ result", result)
-     if (result) {
+    const result2 = await login(email, password)
+    console.log("🚀 ~ file: CreateUser.js ~ line 13 ~ handleClick ~ result", result2)
+     if (result2 === "success") {
     history.push('/main')
-    } else {
+    } else 
+    {
     setError("LOGINに失敗しました。")
-    }}
+    }
+}
 
 const toCreateUser = () => {
     history.push('/createUser')
 }
+
 
     return (
       <div>
@@ -30,9 +33,10 @@ const toCreateUser = () => {
           <TextField id="password" label="password" value={password} onChange={e => setPassword(e.target.value)} /><br />
           
           <button onClick = {toLogin}>LOGIN</button><br/>
-          <Link onClick ={toCreateUser}>アカウント作成</Link>
+          <Link onClick ={toCreateUser}>アカウント作成</Link><br/>
           <div>{error}</div>
       </div>
-    );};
+    );
+};
 
 export default Login;

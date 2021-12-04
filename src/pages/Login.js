@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { useHistory } from "react-router";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import { login, } from '../config/firebase';
+import { login,google } from '../config/firebase';
 
 const Login = () =>{
 const [email, setEmail] = useState('')
@@ -25,6 +25,10 @@ const toCreateUser = () => {
     history.push('/createUser')
 }
 
+const toGoogle = async () =>{
+    const result3 = await google()
+    }
+
 
     return (
       <div>
@@ -34,6 +38,7 @@ const toCreateUser = () => {
           
           <button onClick = {toLogin}>LOGIN</button><br/>
           <Link onClick ={toCreateUser}>アカウント作成</Link><br/>
+          <Link onClick={toGoogle}>Google</Link>
           <div>{error}</div>
       </div>
     );

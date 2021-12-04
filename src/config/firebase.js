@@ -77,6 +77,7 @@ if (!apps.length) {
 
 export const google = async () =>{
 const provider = new GoogleAuthProvider();
+let result3 = ""
 const auth = getAuth();
 await signInWithPopup(auth, provider)
   .then((result) => {
@@ -86,6 +87,7 @@ await signInWithPopup(auth, provider)
     // The signed-in user info.
     const user = result.user;
     console.log("user")
+    result3 = "success"
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -96,12 +98,10 @@ await signInWithPopup(auth, provider)
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
+    console.log(errorMessage)
+    result3 = "error"
+    
   });
 
-  const signout = getAuth();
-signOut(auth).then(() => {
-  // Sign-out successful.
-}).catch((error) => {
-  // An error happened.
-});
+  return result3
 }

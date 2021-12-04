@@ -27,7 +27,15 @@ const toCreateUser = () => {
 
 const toGoogle = async () =>{
     const result3 = await google()
-    }
+    console.log("🚀 ~ file: CreateUser.js ~ line 13 ~ handleClick ~ result3", result3)
+    if (result3 === "success") {
+        history.push('/Main')
+        console.log("Provider")
+    }else if (result3 === "error") {
+        setError("ログインに失敗しました。")
+    }else{
+    console.log("aaa")
+}}
 
 
     return (

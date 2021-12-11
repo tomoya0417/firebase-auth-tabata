@@ -6,6 +6,7 @@
           GoogleAuthProvider,
           signInWithPopup,
           signOut } from "firebase/auth";
+ import { getFirestore,addDoc,collection,query,getDocs } from 'firebase/firestore'
 
 
  // Your web app's Firebase configuration
@@ -20,11 +21,42 @@ const firebaseConfig = {
  appId: process.env.REACT_APP_APP_ID
 };
 
+
  // Initialize Firebase
-const apps = getApps
-if (!apps.length) {
- initializeApp(firebaseConfig)
+ const apps = getApps
+ if (!apps.length) {
+  initializeApp(firebaseConfig)
+ }
+
+ export const readData = async () =>{
+   console.log('readData')
+   const q = query(collection(db, "users"));
+   const querySnapshot = await getDocs(q);
+   querySnapshot.forEach((doc) => {
+     console.log(doc.id, " => ", doc.data());
+   });
+ }
+
+export const db = getFirestore();
+
+export const createDataInFirebase = async () =>{
+  let returnObj = ""
+  console.log('firebase start')
+    try{
+      const docRef = await addDoc(collection(db,"uers"),{
+        first: "AdaAda",
+        last: "Lovelace",
+        born: 1815
+      });
+        returnObj ="test1"
+      console.log("Document written with ID: ",docRef.id);
+    } catch (e){
+      returnObj ="test2"
+    console.error("Error adding document: ", e);
+    }
+  return returnObj
 }
+
 
 //const auth = getAuth();
 //createUserWithEmailAndPassword(auth, email, password)

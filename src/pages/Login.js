@@ -32,6 +32,7 @@ const toGoogle = async () =>{
         history.push('/Main')
         console.log("Provider")
     }else if (result3 === "error") {
+        history.push('/Main')
         setError("ログインに失敗しました。")
     }else{
     console.log("aaa")

@@ -6,7 +6,7 @@
           GoogleAuthProvider,
           signInWithPopup,
           signOut } from "firebase/auth";
- import { getFirestore,addDoc,collection,query,getDocs } from 'firebase/firestore'
+ import { getFirestore,addDoc,collection,query,getDocs,updateDoc,doc,deleteDoc,setDoc } from 'firebase/firestore'
 
 
  // Your web app's Firebase configuration
@@ -43,7 +43,7 @@ export const createDataInFirebase = async () =>{
   let returnObj = ""
   console.log('firebase start')
     try{
-      const docRef = await addDoc(collection(db,"uers"),{
+      const docRef = await addDoc(collection(db,"users"),{
         first: "AdaAda",
         last: "Lovelace",
         born: 1815
@@ -57,6 +57,36 @@ export const createDataInFirebase = async () =>{
   return returnObj
 }
 
+export const updateData = async () => {
+  const washingtonRef = doc(db, "users", "PsgJWx6FgMswazM5nkTR");
+  try{
+    await updateDoc(washingtonRef, {
+      capital: true
+    });
+  }catch(err){
+    console.log(err.message)
+  }
+  };
+
+export const deleteData = async () =>{
+  await deleteDoc(doc(db, "users", "Rmu4gT7hTScC00opqvbM"));
+}
+
+export const myDataInFirebase = async (first,last,born) =>{
+  let returnObj = ""
+  console.log('firebase start')
+  try{
+    const docRef = await addDoc(collection(db,"users"),{
+      first: { first },
+      last: { last },
+      born: { born }
+    });
+    returnObj = "test1"
+    console.log("Document written with ID: ",docRef.id);
+    } catch (e){
+      returnObj ="test2"
+    console.error("Error adding document: ", e);
+    }}
 
 //const auth = getAuth();
 //createUserWithEmailAndPassword(auth, email, password)

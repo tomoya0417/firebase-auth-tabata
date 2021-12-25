@@ -6,7 +6,7 @@
           GoogleAuthProvider,
           signInWithPopup,
           signOut } from "firebase/auth";
- import { getFirestore,addDoc,collection,query,getDocs,updateDoc,doc,deleteDoc,setDoc } from 'firebase/firestore'
+ import { getFirestore,addDoc,collection,query,getDocs,updateDoc,doc,deleteDoc,setDoc,where } from 'firebase/firestore'
 
 
  // Your web app's Firebase configuration
@@ -26,6 +26,24 @@ const firebaseConfig = {
  const apps = getApps
  if (!apps.length) {
   initializeApp(firebaseConfig)
+ }
+
+ export const usersFirebase = async () =>{
+  const q = query(collection(db, "users"), where("users", "==", true));
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+ }
+
+ export const setFirebase = async () =>{
+  await setDoc(doc(db, "users", "programingAcademy"), {
+    first: "tomoya",
+    last: "tabata",
+    born: "1996"
+  });
  }
 
  export const readData = async () =>{

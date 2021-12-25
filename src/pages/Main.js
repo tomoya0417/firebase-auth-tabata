@@ -1,5 +1,5 @@
 import { React,useState }from 'react';
-import { createDataInFirebase, readData, updateData, deleteData, myDataInFirebase } from '../config/firebase';
+import { createDataInFirebase, readData, updateData, deleteData, myDataInFirebase,setFirebase,usersFirebase } from '../config/firebase';
 import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 
@@ -34,6 +34,15 @@ const myData = async () => {
     myDataInFirebase(first, last, born)
 }
 
+const setData = async () =>{
+    await setFirebase ();
+    console.log("set")
+}
+
+const usersData = async () =>{
+    await usersFirebase ();
+    console.log("uers")
+}
 return (
     <div>
         <h1>Main画面</h1>
@@ -51,6 +60,8 @@ return (
             <Button variant="outlined" sonClick={read}>DB読み取り</Button>
             <Button variant="outlined" onClick={handleUpdate}>Update</Button>
             <Button variant="outlined" onClick={handleDelete}>削除</Button>
+            <Button variant="outlined" onClick={setData}>programingAcademy</Button>
+            <Button variant="outlined" onClick={usersData}>get1996</Button>
     </div>
 );};
 

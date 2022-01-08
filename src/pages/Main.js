@@ -3,7 +3,6 @@ import { createDataInFirebase, readData, updateData, deleteData, myDataInFirebas
 import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 
-
 const Main = () =>{
 const createFunc = async () =>{
     console.log('start')
@@ -43,6 +42,7 @@ const usersData = async () =>{
     await usersFirebase ();
     console.log("uers")
 }
+
 return (
     <div>
         <h1>Main画面</h1>

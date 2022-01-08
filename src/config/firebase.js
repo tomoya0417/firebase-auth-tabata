@@ -21,7 +21,6 @@ const firebaseConfig = {
  appId: process.env.REACT_APP_APP_ID
 };
 
-
  // Initialize Firebase
  const apps = getApps
  if (!apps.length) {
@@ -29,7 +28,7 @@ const firebaseConfig = {
  }
 
  export const usersFirebase = async () =>{
-  const q = query(collection(db, "users"), where("users", "==", true));
+  const q = query(collection(db, "users"), where("born","==", "1996"));
 
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
